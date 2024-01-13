@@ -9,11 +9,17 @@ public class Player : MonoBehaviour {
 	public bool isTouchBottom;
 	public bool isTouchLeft;
 	public bool isTouchRight;
-	
+
+	private Animator anim;
+
+	private void Awake() {
+		anim = GetComponent<Animator>();
+	}
+
 	private void Update() {
 		float h = Input.GetAxisRaw("Horizontal");
 		if((h == 1 && isTouchRight) || (h == -1 && isTouchLeft)) h = 0;
-		
+
 		float v = Input.GetAxisRaw("Vertical");
 		if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom)) v = 0;
 		
@@ -21,6 +27,10 @@ public class Player : MonoBehaviour {
 		Vector3 nextPos = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
 
 		transform.position = curPos + nextPos;
+		
+		if((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal"))) {
+			anim.SetInteger("Input", (int)h);
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
