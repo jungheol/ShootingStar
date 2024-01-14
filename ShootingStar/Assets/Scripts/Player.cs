@@ -10,6 +10,9 @@ public class Player : MonoBehaviour {
 	public bool isTouchLeft;
 	public bool isTouchRight;
 
+	public GameObject bulletA;
+	public GameObject bulletB;
+
 	private Animator anim;
 
 	private void Awake() {
@@ -17,6 +20,11 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Update() {
+		PlayerMove();
+		Fire();
+	}
+
+	private void PlayerMove() {
 		float h = Input.GetAxisRaw("Horizontal");
 		if((h == 1 && isTouchRight) || (h == -1 && isTouchLeft)) h = 0;
 
@@ -31,6 +39,12 @@ public class Player : MonoBehaviour {
 		if((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal"))) {
 			anim.SetInteger("Input", (int)h);
 		}
+	}
+
+	private void Fire() {
+		GameObject bullet = Instantiate(bulletA, transform.position, transform.rotation);
+		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
