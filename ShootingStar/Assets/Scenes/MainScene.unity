@@ -537,10 +537,10 @@ GameObject:
   m_Component:
   - component: {fileID: 685898341}
   - component: {fileID: 685898340}
-  - component: {fileID: 685898342}
   - component: {fileID: 685898343}
   - component: {fileID: 685898344}
   - component: {fileID: 685898345}
+  - component: {fileID: 685898342}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -632,6 +632,8 @@ MonoBehaviour:
   isTouchBottom: 0
   isTouchLeft: 0
   isTouchRight: 0
+  bulletA: {fileID: 4774527089781976438, guid: 2ed485fde99cf445c97cc0d0bf5c8970, type: 3}
+  bulletB: {fileID: 8845204827242851817, guid: 8a92c4b97498e44d6b371167d4f36b7e, type: 3}
 --- !u!61 &685898343
 BoxCollider2D:
   m_ObjectHideFlags: 0
