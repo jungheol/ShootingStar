@@ -5,10 +5,17 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	public float moveSpeed;
+	public float power;
+	public float maxShotDelay;
+	public float curShotDelay;
+	
 	public bool isTouchTop;
 	public bool isTouchBottom;
 	public bool isTouchLeft;
 	public bool isTouchRight;
+
+	public GameObject bulletA;
+	public GameObject bulletB;
 
 	private Animator anim;
 
@@ -17,6 +24,12 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Update() {
+		PlayerMove();
+		Fire();
+		Reload();
+	}
+
+	private void PlayerMove() {
 		float h = Input.GetAxisRaw("Horizontal");
 		if((h == 1 && isTouchRight) || (h == -1 && isTouchLeft)) h = 0;
 
@@ -31,6 +44,41 @@ public class Player : MonoBehaviour {
 		if((Input.GetButtonDown("Horizontal")) || (Input.GetButtonUp("Horizontal"))) {
 			anim.SetInteger("Input", (int)h);
 		}
+	}
+
+	private void Fire() {
+		if (!Input.GetButton("Fire1")) return;
+
+		if (curShotDelay < maxShotDelay) return;
+		
+		switch (power) {
+			case 0:
+				SpawnBullet(Vector3.zero, bulletA);
+				break;
+
+			case 1:
+				SpawnBullet(Vector3.right * 0.1f, bulletA);
+				SpawnBullet(Vector3.left * 0.1f, bulletA);
+				break;
+
+			case 2:
+				SpawnBullet(Vector3.right * 0.3f, bulletA);
+				SpawnBullet(Vector3.zero, bulletB);
+				SpawnBullet(Vector3.left * 0.3f, bulletA);
+				break;
+		}
+
+		curShotDelay = 0;
+	}
+
+	private void SpawnBullet(Vector3 positionOffset, GameObject bulletPrefab) {
+		GameObject bullet = Instantiate(bulletPrefab, transform.position + positionOffset, transform.rotation);
+		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+	}
+
+	private void Reload() {
+		curShotDelay += Time.deltaTime;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
