@@ -102,7 +102,15 @@ public class Player : MonoBehaviour {
 					break;
 			}
 		} else if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet")) {
-			manager.RespawnPlayer();
+			life--;
+			manager.UpdateLifeIcon(life);
+
+			if (life == 0) {
+				manager.GameOver();
+			} else {
+				manager.RespawnPlayer();
+			}
+			
 			gameObject.SetActive(false);
 		}
 	}
