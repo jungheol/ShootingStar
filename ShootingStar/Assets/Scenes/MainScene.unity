@@ -1852,6 +1852,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  startIndex: 2
+  endIndex: 0
+  sprites:
+  - {fileID: 1234292760}
+  - {fileID: 1973310590}
+  - {fileID: 667383803}
 --- !u!1 &1008123056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2728,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  startIndex: 2
+  endIndex: 0
+  sprites:
+  - {fileID: 107812354}
+  - {fileID: 1094416218}
+  - {fileID: 1174531673}
 --- !u!1 &1611084150
 GameObject:
   m_ObjectHideFlags: 0
@@ -3196,6 +3208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  startIndex: 2
+  endIndex: 0
+  sprites:
+  - {fileID: 1211858463}
+  - {fileID: 638106049}
+  - {fileID: 1016299701}
 --- !u!1 &1973310589
 GameObject:
   m_ObjectHideFlags: 0
