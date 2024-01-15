@@ -147,4 +147,7 @@ MonoBehaviour:
   - {fileID: 4326287474489854147, guid: 138040323294fd440a3a823e5d70ad01, type: 3}
   bulletA: {fileID: 8845204827242851817, guid: 7e572043a5ff74e34b57b1c82ae51e94, type: 3}
   bulletB: {fileID: 8845204827242851817, guid: 192d8b7b603a94b30aea5d5915092709, type: 3}
+  itemCoin: {fileID: 509551290596762330, guid: 48e9787979c8a430ca62e8114b1c09ea, type: 3}
+  itemPower: {fileID: 4258152356131331076, guid: b0404b712aac54ca1805c757d1e748f7, type: 3}
+  itemBoom: {fileID: 469335947659820595, guid: 2ce7b9ad6f10b4b11b4286b1be86adb9, type: 3}
   player: {fileID: 0}
