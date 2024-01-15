@@ -359,6 +359,7 @@ MonoBehaviour:
   - {fileID: 127178374}
   maxSpawnDelay: 2
   curSpawnDelay: 0
+  player: {fileID: 685898339}
 --- !u!4 &210760786
 Transform:
   m_ObjectHideFlags: 0
