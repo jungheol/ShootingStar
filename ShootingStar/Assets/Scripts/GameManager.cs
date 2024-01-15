@@ -30,9 +30,11 @@ public class GameManager : MonoBehaviour {
 		Enemy enemyLogic = enemy.GetComponent<Enemy>();
 
 		if (ranPoint == 5 || ranPoint == 6) {
+			enemy.transform.Rotate(Vector3.back * 90);
 			rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
 		} else if (ranPoint == 7 || ranPoint == 8) {
 			rigid.velocity = new Vector2(enemyLogic.speed, -1);
+			enemy.transform.Rotate(Vector3.forward * 90);
 		} else {
 			rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
 		}
