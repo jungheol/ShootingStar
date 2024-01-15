@@ -8,6 +8,9 @@ public class Player : MonoBehaviour {
 	public float power;
 	public float maxShotDelay;
 	public float curShotDelay;
+
+	public int life;
+	public int score;
 	
 	public bool isTouchTop;
 	public bool isTouchBottom;
