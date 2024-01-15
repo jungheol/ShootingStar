@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 94196492}
   - component: {fileID: 94196491}
   - component: {fileID: 94196494}
+  - component: {fileID: 94196495}
   m_Layer: 0
   m_Name: Enemy C
   m_TagString: Enemy
@@ -256,6 +257,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &94196495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94196490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4de3924a318479fb37bb1548100422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &135813244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,6 +1173,7 @@ GameObject:
   - component: {fileID: 1914720878}
   - component: {fileID: 1914720880}
   - component: {fileID: 1914720881}
+  - component: {fileID: 1914720882}
   m_Layer: 0
   m_Name: Enemy A
   m_TagString: Enemy
@@ -1271,6 +1285,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1914720882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914720876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4de3924a318479fb37bb1548100422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2022661302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1309,7 @@ GameObject:
   - component: {fileID: 2022661304}
   - component: {fileID: 2022661303}
   - component: {fileID: 2022661306}
+  - component: {fileID: 2022661307}
   m_Layer: 0
   m_Name: Enemy B
   m_TagString: Enemy
@@ -1409,6 +1436,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2022661307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022661302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a4de3924a318479fb37bb1548100422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2058214775
 GameObject:
   m_ObjectHideFlags: 0
