@@ -8,6 +8,9 @@ public class Player : MonoBehaviour {
 	public float power;
 	public float maxShotDelay;
 	public float curShotDelay;
+
+	public int life;
+	public int score;
 	
 	public bool isTouchTop;
 	public bool isTouchBottom;
@@ -99,7 +102,15 @@ public class Player : MonoBehaviour {
 					break;
 			}
 		} else if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet")) {
-			manager.RespawnPlayer();
+			life--;
+			manager.UpdateLifeIcon(life);
+
+			if (life == 0) {
+				manager.GameOver();
+			} else {
+				manager.RespawnPlayer();
+			}
+			
 			gameObject.SetActive(false);
 		}
 	}
