@@ -1277,7 +1277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   power: 0
-  maxPower: 3
+  maxPower: 2
   boom: 0
   maxBoom: 3
   maxShotDelay: 0.2
