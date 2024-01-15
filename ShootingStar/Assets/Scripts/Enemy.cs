@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public string enemyName;
+	public int enemyScore;
 	public float speed;
 	public int health;
 	public float maxShotDelay;
@@ -67,6 +68,8 @@ public class Enemy : MonoBehaviour {
 		Invoke("ReturnSprites", 0.1f);
 		
 		if (health <= 0) {
+			Player playerLogic = player.GetComponent<Player>();
+			playerLogic.score += enemyScore;
 			Destroy(gameObject);
 		}
 	}
