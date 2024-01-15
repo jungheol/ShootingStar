@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
 
 	public GameObject bulletA;
 	public GameObject bulletB;
+	public GameManager manager;
 
 	private Animator anim;
 
@@ -97,6 +98,9 @@ public class Player : MonoBehaviour {
 					isTouchRight = true;
 					break;
 			}
+		} else if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet")) {
+			manager.RespawnPlayer();
+			gameObject.SetActive(false);
 		}
 	}
 	
