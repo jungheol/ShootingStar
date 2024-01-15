@@ -7,6 +7,8 @@ public class Player : MonoBehaviour {
 	public float moveSpeed;
 	public int power;
 	public int maxPower;
+	public int boom;
+	public int maxBoom;
 	public float maxShotDelay;
 	public float curShotDelay;
 
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour {
 	public GameObject boomEffect;
 	
 	public GameManager manager;
+	public bool isBoom;
 
 	private Animator anim;
 
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour {
 	private void Update() {
 		PlayerMove();
 		Fire();
+		Boom();
 		Reload();
 	}
 
@@ -88,6 +92,31 @@ public class Player : MonoBehaviour {
 		curShotDelay += Time.deltaTime;
 	}
 
+	private void Boom() {
+		if (!Input.GetButton("Fire2")) return;
+
+		if (isBoom) return;
+		
+		if (boom == 0) return;
+
+		boom--;
+		manager.UpdateBoomIcon(boom);
+		isBoom = true;
+		boomEffect.SetActive(true);
+		Invoke("OffBoomEffect", 3f);
+					
+		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+		for (int i = 0; i < enemies.Length; i++) {
+			Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
+			enemyLogic.OnHit(500);
+		}
+					
+		GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+		for (int i = 0; i < bullets.Length; i++) {
+			Destroy(bullets[i]);
+		}
+	}
+
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("Border")) {
 			switch (other.gameObject.name) {
@@ -126,18 +155,10 @@ public class Player : MonoBehaviour {
 					else power++;
 					break;
 				case "Boom":
-					boomEffect.SetActive(true);
-					Invoke("OffBoomEffect", 3f);
-					
-					GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-					for (int i = 0; i < enemies.Length; i++) {
-						Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
-						enemyLogic.OnHit(500);
-					}
-					
-					GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-					for (int i = 0; i < enemies.Length; i++) {
-						Destroy(bullets[i]);
+					if (boom == maxBoom) score += 500;
+					else {
+						boom++;
+						manager.UpdateBoomIcon(boom);
 					}
 					break;
 			}
@@ -147,6 +168,7 @@ public class Player : MonoBehaviour {
 
 	private void OffBoomEffect() {
 		boomEffect.SetActive(false);
+		isBoom = false;
 	}
 	
 	private void OnTriggerExit2D(Collider2D other) {
