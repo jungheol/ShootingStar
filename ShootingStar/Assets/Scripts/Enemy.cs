@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour {
 		curShotDelay += Time.deltaTime;
 	}
 
-	private void OnHit(int dmg) {
+	public void OnHit(int dmg) {
 		health -= dmg;
 		spriteRenderer.sprite = sprites[(int)SpriteName.Hit];
 		Invoke("ReturnSprites", 0.1f);
