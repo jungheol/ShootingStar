@@ -628,6 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  maxShotDelay: 0.2
+  curShotDelay: 0
   isTouchTop: 0
   isTouchBottom: 0
   isTouchLeft: 0

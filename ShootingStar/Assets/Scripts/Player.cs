@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	public float moveSpeed;
+	public float maxShotDelay;
+	public float curShotDelay;
+	
 	public bool isTouchTop;
 	public bool isTouchBottom;
 	public bool isTouchLeft;
@@ -22,6 +25,7 @@ public class Player : MonoBehaviour {
 	private void Update() {
 		PlayerMove();
 		Fire();
+		Reload();
 	}
 
 	private void PlayerMove() {
@@ -42,9 +46,19 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Fire() {
+		if (!Input.GetButton("Fire1")) return;
+
+		if (curShotDelay < maxShotDelay) return; 
+		
 		GameObject bullet = Instantiate(bulletA, transform.position, transform.rotation);
 		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+
+		curShotDelay = 0;
+	}
+
+	private void Reload() {
+		curShotDelay += Time.deltaTime;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
