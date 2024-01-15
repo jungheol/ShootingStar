@@ -5,7 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	public float moveSpeed;
-	public float power;
+	public int power;
+	public int maxPower;
 	public float maxShotDelay;
 	public float curShotDelay;
 
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour {
 
 	public GameObject bulletA;
 	public GameObject bulletB;
+	public GameObject boomEffect;
+	
 	public GameManager manager;
 
 	private Animator anim;
@@ -112,7 +115,38 @@ public class Player : MonoBehaviour {
 			}
 			
 			gameObject.SetActive(false);
+		} else if (other.CompareTag("Item")) {
+			Item item = other.gameObject.GetComponent<Item>();
+			switch (item.type) {
+				case "Coin":
+					score += 1000;
+					break;
+				case "Power":
+					if (power == maxPower) score += 500;
+					else power++;
+					break;
+				case "Boom":
+					boomEffect.SetActive(true);
+					Invoke("OffBoomEffect", 3f);
+					
+					GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+					for (int i = 0; i < enemies.Length; i++) {
+						Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
+						enemyLogic.OnHit(500);
+					}
+					
+					GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+					for (int i = 0; i < enemies.Length; i++) {
+						Destroy(bullets[i]);
+					}
+					break;
+			}
+			Destroy(other.gameObject);
 		}
+	}
+
+	private void OffBoomEffect() {
+		boomEffect.SetActive(false);
 	}
 	
 	private void OnTriggerExit2D(Collider2D other) {
