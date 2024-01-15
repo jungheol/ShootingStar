@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour {
 	public Sprite[] sprites;
 	public GameObject bulletA;
 	public GameObject bulletB;
+	public GameObject itemCoin;
+	public GameObject itemPower;
+	public GameObject itemBoom;
 	public GameObject player;
 
 	private SpriteRenderer spriteRenderer;
@@ -42,8 +45,8 @@ public class Enemy : MonoBehaviour {
 			rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
 			
 		} else if (enemyName == "enemyC") {
-			GameObject bulletR = Instantiate(bulletA, transform.position + Vector3.right * 0.3f, transform.rotation);
-			GameObject bulletL = Instantiate(bulletA, transform.position + Vector3.left * 0.3f, transform.rotation);
+			GameObject bulletR = Instantiate(bulletB, transform.position + Vector3.right * 0.3f, transform.rotation);
+			GameObject bulletL = Instantiate(bulletB, transform.position + Vector3.left * 0.3f, transform.rotation);
 			
 			Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
 			Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
@@ -62,7 +65,9 @@ public class Enemy : MonoBehaviour {
 		curShotDelay += Time.deltaTime;
 	}
 
-	private void OnHit(int dmg) {
+	public void OnHit(int dmg) {
+		if(health <= 0) return;
+		
 		health -= dmg;
 		spriteRenderer.sprite = sprites[(int)SpriteName.Hit];
 		Invoke("ReturnSprites", 0.1f);
@@ -70,6 +75,17 @@ public class Enemy : MonoBehaviour {
 		if (health <= 0) {
 			Player playerLogic = player.GetComponent<Player>();
 			playerLogic.score += enemyScore;
+
+			int ran = Random.Range(0, 10);
+			if (ran < 5) {
+				
+			} else if (ran < 8) {
+				Instantiate(itemCoin, transform.position, itemCoin.transform.rotation);
+			} else if (ran < 9) {
+				Instantiate(itemPower, transform.position, itemPower.transform.rotation);
+			} else if (ran < 10) {
+				Instantiate(itemBoom, transform.position, itemBoom.transform.rotation);
+			}
 			Destroy(gameObject);
 		}
 	}
