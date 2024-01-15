@@ -831,6 +831,7 @@ MonoBehaviour:
   isTouchRight: 0
   bulletA: {fileID: 4774527089781976438, guid: 2ed485fde99cf445c97cc0d0bf5c8970, type: 3}
   bulletB: {fileID: 8845204827242851817, guid: 8a92c4b97498e44d6b371167d4f36b7e, type: 3}
+  manager: {fileID: 210760785}
 --- !u!61 &685898343
 BoxCollider2D:
   m_ObjectHideFlags: 0
