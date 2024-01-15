@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	public float moveSpeed;
+	public float power;
 	public float maxShotDelay;
 	public float curShotDelay;
 	
@@ -48,13 +49,32 @@ public class Player : MonoBehaviour {
 	private void Fire() {
 		if (!Input.GetButton("Fire1")) return;
 
-		if (curShotDelay < maxShotDelay) return; 
+		if (curShotDelay < maxShotDelay) return;
 		
-		GameObject bullet = Instantiate(bulletA, transform.position, transform.rotation);
-		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+		switch (power) {
+			case 0:
+				SpawnBullet(Vector3.zero, bulletA);
+				break;
+
+			case 1:
+				SpawnBullet(Vector3.right * 0.1f, bulletA);
+				SpawnBullet(Vector3.left * 0.1f, bulletA);
+				break;
+
+			case 2:
+				SpawnBullet(Vector3.right * 0.3f, bulletA);
+				SpawnBullet(Vector3.zero, bulletB);
+				SpawnBullet(Vector3.left * 0.3f, bulletA);
+				break;
+		}
 
 		curShotDelay = 0;
+	}
+
+	private void SpawnBullet(Vector3 positionOffset, GameObject bulletPrefab) {
+		GameObject bullet = Instantiate(bulletPrefab, transform.position + positionOffset, transform.rotation);
+		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 	}
 
 	private void Reload() {
