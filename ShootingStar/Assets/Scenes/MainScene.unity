@@ -1121,7 +1121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   power: 0
-  maxPower: 0
+  maxPower: 3
   maxShotDelay: 0.2
   curShotDelay: 0
   life: 3
@@ -1132,6 +1132,7 @@ MonoBehaviour:
   isTouchRight: 0
   bulletA: {fileID: 4774527089781976438, guid: 2ed485fde99cf445c97cc0d0bf5c8970, type: 3}
   bulletB: {fileID: 8845204827242851817, guid: 8a92c4b97498e44d6b371167d4f36b7e, type: 3}
+  boomEffect: {fileID: 560140070}
   manager: {fileID: 210760785}
 --- !u!61 &685898343
 BoxCollider2D:
@@ -1673,7 +1674,7 @@ GameObject:
   - component: {fileID: 1185497481}
   m_Layer: 0
   m_Name: Item_Coin
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2392,7 +2393,7 @@ GameObject:
   - component: {fileID: 2007409767}
   m_Layer: 0
   m_Name: Item_Boom
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2748,7 +2749,7 @@ GameObject:
   - component: {fileID: 2110305375}
   m_Layer: 0
   m_Name: Item_Power
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
