@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour {
 
@@ -16,18 +17,31 @@ public class Enemy : MonoBehaviour {
 	public float maxShotDelay;
 	public float curShotDelay;
 	public Sprite[] sprites;
-	public GameObject bulletA;
-	public GameObject bulletB;
-	public GameObject itemCoin;
-	public GameObject itemPower;
-	public GameObject itemBoom;
 	public GameObject player;
+	public PoolManager poolManager;
 
 	private SpriteRenderer spriteRenderer;
 
 
 	private void Awake() {
 		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
+	private void OnEnable() {
+		switch (enemyName) {
+			case "enemyA":
+				health = 3;
+				Debug.Log("enemyA");
+				break;
+			case "enemyB":
+				health = 15;
+				Debug.Log("enemyB");
+				break;
+			case "enemyC":
+				health = 50;
+				Debug.Log("enemyC");
+				break;
+		}
 	}
 
 	private void Update() {
@@ -39,14 +53,17 @@ public class Enemy : MonoBehaviour {
 		if (curShotDelay < maxShotDelay) return;
 
 		if (enemyName == "enemyA") {
-			GameObject bullet = Instantiate(bulletA, transform.position, transform.rotation);
+			GameObject bullet = poolManager.MakeObj("BulletEnemyA");
+			bullet.transform.position = transform.position;
 			Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 			Vector3 dirVec = player.transform.position - transform.position;
 			rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
 			
 		} else if (enemyName == "enemyC") {
-			GameObject bulletR = Instantiate(bulletB, transform.position + Vector3.right * 0.3f, transform.rotation);
-			GameObject bulletL = Instantiate(bulletB, transform.position + Vector3.left * 0.3f, transform.rotation);
+			GameObject bulletR = poolManager.MakeObj("BulletEnemyB");
+			bulletR.transform.position = transform.position;
+			GameObject bulletL = poolManager.MakeObj("BulletEnemyB");
+			bulletL.transform.position = transform.position;
 			
 			Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
 			Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
@@ -80,13 +97,17 @@ public class Enemy : MonoBehaviour {
 			if (ran < 5) {
 				
 			} else if (ran < 8) {
-				Instantiate(itemCoin, transform.position, itemCoin.transform.rotation);
+				GameObject itemCoin = poolManager.MakeObj("ItemCoin");
+				itemCoin.transform.position = transform.position;
 			} else if (ran < 9) {
-				Instantiate(itemPower, transform.position, itemPower.transform.rotation);
+				GameObject itemPower = poolManager.MakeObj("ItemPower");
+				itemPower.transform.position = transform.position;
 			} else if (ran < 10) {
-				Instantiate(itemBoom, transform.position, itemBoom.transform.rotation);
+				GameObject itemBoom = poolManager.MakeObj("ItemBoom");
+				itemBoom.transform.position = transform.position;
 			}
-			Destroy(gameObject);
+			gameObject.SetActive(false);
+			transform.rotation = Quaternion.identity;
 		}
 	}
 
@@ -95,11 +116,13 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("BorderBullet")) Destroy(gameObject);
-		else if (other.CompareTag("PlayerBullet")) {
+		if (other.CompareTag("BorderBullet")) {
+			gameObject.SetActive(false);
+			transform.rotation = Quaternion.identity;
+		} else if (other.CompareTag("PlayerBullet")) {
 			Bullet bullet = other.gameObject.GetComponent<Bullet>();
 			OnHit(bullet.dmg);
-			Destroy(other.gameObject);
+			other.gameObject.SetActive(false);
 		}
 	}
 }
