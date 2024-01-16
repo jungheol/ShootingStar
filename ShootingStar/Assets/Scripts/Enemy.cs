@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour {
 	public GameObject itemPower;
 	public GameObject itemBoom;
 	public GameObject player;
+	public PoolManager poolManager;
 
 	private SpriteRenderer spriteRenderer;
 
@@ -39,14 +40,17 @@ public class Enemy : MonoBehaviour {
 		if (curShotDelay < maxShotDelay) return;
 
 		if (enemyName == "enemyA") {
-			GameObject bullet = Instantiate(bulletA, transform.position, transform.rotation);
+			GameObject bullet = poolManager.MakeObj("BulletEnemyA");
+			bullet.transform.position = transform.position;
 			Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 			Vector3 dirVec = player.transform.position - transform.position;
 			rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
 			
 		} else if (enemyName == "enemyC") {
-			GameObject bulletR = Instantiate(bulletB, transform.position + Vector3.right * 0.3f, transform.rotation);
-			GameObject bulletL = Instantiate(bulletB, transform.position + Vector3.left * 0.3f, transform.rotation);
+			GameObject bulletR = poolManager.MakeObj("BulletEnemyB");
+			bulletR.transform.position = transform.position;
+			GameObject bulletL = poolManager.MakeObj("BulletEnemyB");
+			bulletL.transform.position = transform.position;
 			
 			Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
 			Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
@@ -80,11 +84,14 @@ public class Enemy : MonoBehaviour {
 			if (ran < 5) {
 				
 			} else if (ran < 8) {
-				Instantiate(itemCoin, transform.position, itemCoin.transform.rotation);
+				GameObject itemCoin = poolManager.MakeObj("ItemCoin");
+				itemCoin.transform.position = transform.position;
 			} else if (ran < 9) {
-				Instantiate(itemPower, transform.position, itemPower.transform.rotation);
+				GameObject itemPower = poolManager.MakeObj("ItemPower");
+				itemPower.transform.position = transform.position;
 			} else if (ran < 10) {
-				Instantiate(itemBoom, transform.position, itemBoom.transform.rotation);
+				GameObject itemBoom = poolManager.MakeObj("ItemBoom");
+				itemBoom.transform.position = transform.position;
 			}
 			gameObject.SetActive(false);
 		}

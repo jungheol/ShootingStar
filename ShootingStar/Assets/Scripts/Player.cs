@@ -166,7 +166,7 @@ public class Player : MonoBehaviour {
 					}
 					break;
 			}
-			Destroy(other.gameObject);
+			other.gameObject.SetActive(false);
 		}
 	}
 

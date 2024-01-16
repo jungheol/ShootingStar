@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
 		Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
 		Enemy enemyLogic = enemy.GetComponent<Enemy>();
 		enemyLogic.player = player;
+		enemyLogic.poolManager = poolManager;
 		
 		if (ranPoint == 5 || ranPoint == 6) {
 			enemy.transform.Rotate(Vector3.back * 90);
