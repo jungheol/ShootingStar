@@ -1613,6 +1613,60 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &715523937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715523939}
+  - component: {fileID: 715523938}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &715523938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715523937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0286b2063d51247998960551ec92bc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAPrefab: {fileID: 6621443602163518548, guid: f0af71a6e07d4460c881dac09db58cf1, type: 3}
+  enemyBPrefab: {fileID: 1120905657049086499, guid: 3b495e0b81d30471dae26bff5034db24, type: 3}
+  enemyCPrefab: {fileID: 4990785257389153338, guid: d8cf83110af0b4e429d9aebe10d59b35, type: 3}
+  itemCoinPrefab: {fileID: 509551290596762330, guid: 48e9787979c8a430ca62e8114b1c09ea, type: 3}
+  itemPowerPrefab: {fileID: 4258152356131331076, guid: b0404b712aac54ca1805c757d1e748f7, type: 3}
+  itemBoomPrefab: {fileID: 469335947659820595, guid: 2ce7b9ad6f10b4b11b4286b1be86adb9, type: 3}
+  bulletPlayerAPrefab: {fileID: 4774527089781976438, guid: 2ed485fde99cf445c97cc0d0bf5c8970, type: 3}
+  bulletPlayerBPrefab: {fileID: 8845204827242851817, guid: 8a92c4b97498e44d6b371167d4f36b7e, type: 3}
+  bulletEnemyAPrefab: {fileID: 8845204827242851817, guid: 7e572043a5ff74e34b57b1c82ae51e94, type: 3}
+  bulletEnemyBPrefab: {fileID: 8845204827242851817, guid: 192d8b7b603a94b30aea5d5915092709, type: 3}
+--- !u!4 &715523939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715523937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &736230538
 GameObject:
   m_ObjectHideFlags: 0
