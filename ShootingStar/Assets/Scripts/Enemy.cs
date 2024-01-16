@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour {
 		else if (other.CompareTag("PlayerBullet")) {
 			Bullet bullet = other.gameObject.GetComponent<Bullet>();
 			OnHit(bullet.dmg);
-			Destroy(other.gameObject);
+			other.gameObject.SetActive(false);
 		}
 	}
 }

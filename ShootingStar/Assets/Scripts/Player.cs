@@ -20,17 +20,20 @@ public class Player : MonoBehaviour {
 	public bool isTouchLeft;
 	public bool isTouchRight;
 
-	public GameObject bulletA;
-	public GameObject bulletB;
 	public GameObject boomEffect;
 	
 	public GameManager manager;
+	public PoolManager poolManager;
 	public bool isBoom;
 
 	private Animator anim;
+	private string bulletA;
+	private string bulletB;
 
 	private void Awake() {
 		anim = GetComponent<Animator>();
+		bulletA = "BulletPlayerA";
+		bulletB = "BulletPlayerB";
 	}
 
 	private void Update() {
@@ -82,8 +85,9 @@ public class Player : MonoBehaviour {
 		curShotDelay = 0;
 	}
 
-	private void SpawnBullet(Vector3 positionOffset, GameObject bulletPrefab) {
-		GameObject bullet = Instantiate(bulletPrefab, transform.position + positionOffset, transform.rotation);
+	private void SpawnBullet(Vector3 positionOffset, string bulletPrefab) {
+		GameObject bullet = poolManager.MakeObj(bulletPrefab);
+		bullet.transform.position = transform.position;
 		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 	}
@@ -113,7 +117,7 @@ public class Player : MonoBehaviour {
 					
 		GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
 		for (int i = 0; i < bullets.Length; i++) {
-			Destroy(bullets[i]);
+			bullets[i].SetActive(false);
 		}
 	}
 

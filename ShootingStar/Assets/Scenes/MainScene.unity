@@ -618,9 +618,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyObjects:
-  - {fileID: 6621443602163518548, guid: f0af71a6e07d4460c881dac09db58cf1, type: 3}
-  - {fileID: 1120905657049086499, guid: 3b495e0b81d30471dae26bff5034db24, type: 3}
-  - {fileID: 4990785257389153338, guid: d8cf83110af0b4e429d9aebe10d59b35, type: 3}
+  - 
+  - 
+  - 
   spawnPoints:
   - {fileID: 1611084151}
   - {fileID: 1906882404}
@@ -1545,6 +1545,7 @@ MonoBehaviour:
   bulletB: {fileID: 8845204827242851817, guid: 8a92c4b97498e44d6b371167d4f36b7e, type: 3}
   boomEffect: {fileID: 560140070}
   manager: {fileID: 210760785}
+  poolManager: {fileID: 715523938}
   isBoom: 0
 --- !u!61 &685898343
 BoxCollider2D:

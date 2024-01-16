@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour {
 	
 	private void OnTriggerEnter2D(Collider2D other) {
 		if (other.CompareTag("BorderBullet")) {
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }
