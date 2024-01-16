@@ -108,15 +108,39 @@ public class Player : MonoBehaviour {
 		boomEffect.SetActive(true);
 		Invoke("OffBoomEffect", 3f);
 					
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-		for (int i = 0; i < enemies.Length; i++) {
-			Enemy enemyLogic = enemies[i].GetComponent<Enemy>();
-			enemyLogic.OnHit(500);
+		GameObject[] enemiesA = poolManager.GetPool("enemyA");
+		GameObject[] enemiesB = poolManager.GetPool("enemyB");
+		GameObject[] enemiesC = poolManager.GetPool("enemyC");
+		for (int i = 0; i < enemiesA.Length; i++) {
+			if (enemiesA[i].activeSelf) {
+				Enemy enemyLogic = enemiesA[i].GetComponent<Enemy>();
+				enemyLogic.OnHit(500);
+			}
 		}
-					
-		GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-		for (int i = 0; i < bullets.Length; i++) {
-			bullets[i].SetActive(false);
+		for (int i = 0; i < enemiesB.Length; i++) {
+			if (enemiesB[i].activeSelf) {
+				Enemy enemyLogic = enemiesB[i].GetComponent<Enemy>();
+				enemyLogic.OnHit(500);
+			}
+		}
+		for (int i = 0; i < enemiesC.Length; i++) {
+			if (enemiesC[i].activeSelf) {
+				Enemy enemyLogic = enemiesC[i].GetComponent<Enemy>();
+				enemyLogic.OnHit(500);
+			}
+		}
+
+		GameObject[] bulletsA = poolManager.GetPool("BulletEnemyA");
+		GameObject[] bulletsB = poolManager.GetPool("BulletEnemyB");
+		for (int i = 0; i < bulletsA.Length; i++) {
+			if(bulletsA[i].activeSelf) {
+				bulletsA[i].SetActive(false);
+			}
+		}
+		for (int i = 0; i < bulletsB.Length; i++) {
+			if(bulletsB[i].activeSelf) {
+				bulletsB[i].SetActive(false);
+			}
 		}
 	}
 
