@@ -28,6 +28,8 @@ public class PoolManager : MonoBehaviour {
 	private GameObject[] bulletEnemyA;
 	private GameObject[] bulletEnemyB;
 
+	private GameObject[] targetPool;
+
 	private void Awake() {
 		enemyA = new GameObject[10];
 		enemyB = new GameObject[10];
@@ -86,5 +88,49 @@ public class PoolManager : MonoBehaviour {
 			bulletEnemyB[i] = Instantiate(bulletEnemyBPrefab);
 			bulletEnemyB[i].SetActive(false);
 		}
+	}
+
+	public GameObject MakeObj(string type) {
+		switch (type) {
+			case "EnemyA":
+				targetPool = enemyA;
+				break;
+			case "EnemyB":
+				targetPool = enemyB;
+				break;
+			case "EnemyC":
+				targetPool = enemyC;
+				break;
+			case "ItemCoin":
+				targetPool = itemCoin;
+				break;
+			case "ItemPower":
+				targetPool = itemPower;
+				break;
+			case "ItemBoom":
+				targetPool = itemBoom;
+				break;
+			case "BulletPlayerA":
+				targetPool = bulletPlayerA;
+				break;
+			case "BulletPlayerB":
+				targetPool = bulletPlayerB;
+				break;
+			case "BulletEnemyA":
+				targetPool = bulletEnemyA;
+				break;
+			case "BulletEnemyB":
+				targetPool = bulletEnemyB;
+				break;
+		}
+
+		for (int i = 0; i < targetPool.Length; i++) {
+			if (!targetPool[i].activeSelf) {
+				targetPool[i].SetActive(true);
+				return targetPool[i];
+			}
+		}
+
+		return null;
 	}
 }
