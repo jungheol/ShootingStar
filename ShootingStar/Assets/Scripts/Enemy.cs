@@ -17,11 +17,6 @@ public class Enemy : MonoBehaviour {
 	public float maxShotDelay;
 	public float curShotDelay;
 	public Sprite[] sprites;
-	public GameObject bulletA;
-	public GameObject bulletB;
-	public GameObject itemCoin;
-	public GameObject itemPower;
-	public GameObject itemBoom;
 	public GameObject player;
 	public PoolManager poolManager;
 

@@ -21,7 +21,6 @@ public class Player : MonoBehaviour {
 	public bool isTouchRight;
 
 	public GameObject boomEffect;
-	
 	public GameManager manager;
 	public PoolManager poolManager;
 	public bool isBoom;
