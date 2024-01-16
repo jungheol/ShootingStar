@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour {
 			} else if (ran < 10) {
 				Instantiate(itemBoom, transform.position, itemBoom.transform.rotation);
 			}
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 
@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("BorderBullet")) Destroy(gameObject);
+		if (other.CompareTag("BorderBullet")) gameObject.SetActive(false);
 		else if (other.CompareTag("PlayerBullet")) {
 			Bullet bullet = other.gameObject.GetComponent<Bullet>();
 			OnHit(bullet.dmg);

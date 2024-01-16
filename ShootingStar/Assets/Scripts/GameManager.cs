@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject[] enemyObjects;
+	public string[] enemyObjects;
 	public Transform[] spawnPoints;
 
 	public float maxSpawnDelay;
@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour {
 	public Image[] lifeImage;
 	public Image[] boomImage;
 	public GameObject gameoverPanel;
+	public PoolManager poolManager;
+
+	private void Awake() {
+		enemyObjects = new string[] { "EnemyA", "EnemyB", "EnemyC" };
+	}
 
 	private void Update() {
 		curSpawnDelay += Time.deltaTime;
@@ -35,8 +40,9 @@ public class GameManager : MonoBehaviour {
 	private void SpawnEnemy() {
 		int ranEnemy = Random.Range(0, 3);
 		int ranPoint = Random.Range(0, 9);
-		GameObject enemy = Instantiate(enemyObjects[ranEnemy], spawnPoints[ranPoint].position, spawnPoints[ranPoint].rotation);
-
+		GameObject enemy = poolManager.MakeObj(enemyObjects[ranEnemy]);
+		enemy.transform.position = spawnPoints[ranPoint].position;
+		
 		Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
 		Enemy enemyLogic = enemy.GetComponent<Enemy>();
 		enemyLogic.player = player;
