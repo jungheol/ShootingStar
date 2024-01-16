@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour {
 
@@ -29,6 +30,23 @@ public class Enemy : MonoBehaviour {
 
 	private void Awake() {
 		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
+	private void OnEnable() {
+		switch (enemyName) {
+			case "enemyA":
+				health = 3;
+				Debug.Log("enemyA");
+				break;
+			case "enemyB":
+				health = 15;
+				Debug.Log("enemyB");
+				break;
+			case "enemyC":
+				health = 50;
+				Debug.Log("enemyC");
+				break;
+		}
 	}
 
 	private void Update() {
@@ -94,6 +112,7 @@ public class Enemy : MonoBehaviour {
 				itemBoom.transform.position = transform.position;
 			}
 			gameObject.SetActive(false);
+			transform.rotation = Quaternion.identity;
 		}
 	}
 
@@ -102,8 +121,10 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("BorderBullet")) gameObject.SetActive(false);
-		else if (other.CompareTag("PlayerBullet")) {
+		if (other.CompareTag("BorderBullet")) {
+			gameObject.SetActive(false);
+			transform.rotation = Quaternion.identity;
+		} else if (other.CompareTag("PlayerBullet")) {
 			Bullet bullet = other.gameObject.GetComponent<Bullet>();
 			OnHit(bullet.dmg);
 			other.gameObject.SetActive(false);

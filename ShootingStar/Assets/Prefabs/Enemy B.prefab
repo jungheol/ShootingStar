@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4de3924a318479fb37bb1548100422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyName: 
+  enemyName: enemyB
   enemyScore: 200
   speed: 3
   health: 15
@@ -166,3 +166,4 @@ MonoBehaviour:
   itemPower: {fileID: 4258152356131331076, guid: b0404b712aac54ca1805c757d1e748f7, type: 3}
   itemBoom: {fileID: 469335947659820595, guid: 2ce7b9ad6f10b4b11b4286b1be86adb9, type: 3}
   player: {fileID: 0}
+  poolManager: {fileID: 0}

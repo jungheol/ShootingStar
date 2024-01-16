@@ -87,7 +87,7 @@ public class Player : MonoBehaviour {
 
 	private void SpawnBullet(Vector3 positionOffset, string bulletPrefab) {
 		GameObject bullet = poolManager.MakeObj(bulletPrefab);
-		bullet.transform.position = transform.position;
+		bullet.transform.position = transform.position + positionOffset;
 		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
 		rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 	}
