@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
@@ -10,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	public string[] enemyObjects;
 	public Transform[] spawnPoints;
 
-	public float maxSpawnDelay;
+	public float nextSpawnDelay;
 	public float curSpawnDelay;
 
 	public GameObject player;
@@ -20,16 +21,46 @@ public class GameManager : MonoBehaviour {
 	public GameObject gameoverPanel;
 	public PoolManager poolManager;
 
+	public List<Spawn> spawnList;
+	public int spawnIndex;
+	public bool isSpawnFinish;
+
 	private void Awake() {
 		enemyObjects = new string[] { "EnemyA", "EnemyB", "EnemyC" };
+		ReadSpawnFile();
+	}
+
+	private void ReadSpawnFile() {
+		// 초기화
+		spawnList.Clear();
+		spawnIndex = 0;
+		isSpawnFinish = false;
+		// 파일 읽기
+		TextAsset textFile = Resources.Load("stage 0") as TextAsset;
+		StringReader stringReader = new StringReader(textFile.text);
+
+		while (stringReader != null) {
+			string line = stringReader.ReadLine();
+			
+			if(line == null) break;
+			// 데이터 생성 및 리스트에 추가
+			Spawn spawnData = new Spawn();
+			spawnData.delay = float.Parse(line.Split(',')[0]);
+			spawnData.type = line.Split(',')[1];
+			spawnData.point = int.Parse(line.Split(',')[2]);
+			spawnList.Add(spawnData);
+		}
+		// 파일 닫기
+		stringReader.Close();
+		nextSpawnDelay = spawnList[0].delay;
 	}
 
 	private void Update() {
 		curSpawnDelay += Time.deltaTime;
 
-		if (curSpawnDelay > maxSpawnDelay) {
+		if (curSpawnDelay > nextSpawnDelay) {
 			SpawnEnemy();
-			maxSpawnDelay = Random.Range(0.5f, 2.5f);
+			nextSpawnDelay = Random.Range(0.5f, 2.5f);
 			curSpawnDelay = 0;
 		}
 
