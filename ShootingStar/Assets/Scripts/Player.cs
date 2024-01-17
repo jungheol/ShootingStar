@@ -21,6 +21,7 @@ public class Player : MonoBehaviour {
 	public bool isTouchRight;
 
 	public GameObject boomEffect;
+	public GameObject[] followers;
 	public GameManager manager;
 	public PoolManager poolManager;
 	public bool isBoom;
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour {
 				SpawnBullet(Vector3.left * 0.1f, bulletA);
 				break;
 
-			case 2:
+			default:
 				SpawnBullet(Vector3.right * 0.3f, bulletA);
 				SpawnBullet(Vector3.zero, bulletB);
 				SpawnBullet(Vector3.left * 0.3f, bulletA);
@@ -179,7 +180,10 @@ public class Player : MonoBehaviour {
 					break;
 				case "Power":
 					if (power == maxPower) score += 500;
-					else power++;
+					else {
+						power++;
+						AddFollower();
+					}
 					break;
 				case "Boom":
 					if (boom == maxBoom) score += 500;
@@ -196,6 +200,12 @@ public class Player : MonoBehaviour {
 	private void OffBoomEffect() {
 		boomEffect.SetActive(false);
 		isBoom = false;
+	}
+
+	private void AddFollower() {
+		if (power == 3) followers[0].SetActive(true);
+		else if (power == 4) followers[1].SetActive(true);
+		else if (power == 5) followers[2].SetActive(true);
 	}
 	
 	private void OnTriggerExit2D(Collider2D other) {
