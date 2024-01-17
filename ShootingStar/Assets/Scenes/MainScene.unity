@@ -3175,6 +3175,9 @@ MonoBehaviour:
   maxShotDelay: 0.2
   curShotDelay: 0
   poolManager: {fileID: 715523938}
+  followPos: {x: 0, y: 0, z: 0}
+  followDelay: 50
+  parent: {fileID: 685898341}
 --- !u!1 &1783836943
 GameObject:
   m_ObjectHideFlags: 0
