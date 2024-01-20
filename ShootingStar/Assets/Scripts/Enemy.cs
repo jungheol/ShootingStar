@@ -21,10 +21,12 @@ public class Enemy : MonoBehaviour {
 	public PoolManager poolManager;
 
 	private SpriteRenderer spriteRenderer;
+	private Animator anim;
 
 
 	private void Awake() {
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		if (enemyName == "Boss") anim = GetComponent<Animator>();
 	}
 
 	private void OnEnable() {
@@ -45,6 +47,8 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void Update() {
+		if(enemyName == "Boss") return;
+		
 		Fire();
 		Reload();
 	}
@@ -86,14 +90,18 @@ public class Enemy : MonoBehaviour {
 		if(health <= 0) return;
 		
 		health -= dmg;
-		spriteRenderer.sprite = sprites[(int)SpriteName.Hit];
-		Invoke("ReturnSprites", 0.1f);
+		if (enemyName == "Boss") {
+			anim.SetTrigger("OnHit");
+		} else {
+			spriteRenderer.sprite = sprites[(int)SpriteName.Hit];
+			Invoke("ReturnSprites", 0.1f);
+		}
 		
 		if (health <= 0) {
 			Player playerLogic = player.GetComponent<Player>();
 			playerLogic.score += enemyScore;
 
-			int ran = Random.Range(0, 10);
+			int ran = enemyName == "Boss" ? 0 : Random.Range(0, 10);
 			if (ran < 5) {
 				
 			} else if (ran < 8) {
@@ -116,7 +124,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
-		if (other.CompareTag("BorderBullet")) {
+		if (other.CompareTag("BorderBullet") && enemyName != "Boss") {
 			gameObject.SetActive(false);
 			transform.rotation = Quaternion.identity;
 		} else if (other.CompareTag("PlayerBullet")) {
