@@ -167,3 +167,4 @@ MonoBehaviour:
   sprites: []
   player: {fileID: 0}
   poolManager: {fileID: 0}
+  maxPatternCount: 0200000003000000640000000a000000

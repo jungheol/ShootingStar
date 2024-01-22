@@ -1651,7 +1651,7 @@ MonoBehaviour:
   enemyAPrefab: {fileID: 6621443602163518548, guid: f0af71a6e07d4460c881dac09db58cf1, type: 3}
   enemyBPrefab: {fileID: 1120905657049086499, guid: 3b495e0b81d30471dae26bff5034db24, type: 3}
   enemyCPrefab: {fileID: 4990785257389153338, guid: d8cf83110af0b4e429d9aebe10d59b35, type: 3}
-  enemyDPrefab: {fileID: 8845204827242851817, guid: b1080c8273af743a0bc18f963c7a66d9, type: 3}
+  enemyDPrefab: {fileID: 1056826553626581282, guid: b888acfc50adb4fb5beacfcea9265c6a, type: 3}
   itemCoinPrefab: {fileID: 509551290596762330, guid: 48e9787979c8a430ca62e8114b1c09ea, type: 3}
   itemPowerPrefab: {fileID: 4258152356131331076, guid: b0404b712aac54ca1805c757d1e748f7, type: 3}
   itemBoomPrefab: {fileID: 469335947659820595, guid: 2ce7b9ad6f10b4b11b4286b1be86adb9, type: 3}

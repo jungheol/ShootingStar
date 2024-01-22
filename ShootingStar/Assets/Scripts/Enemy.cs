@@ -23,6 +23,9 @@ public class Enemy : MonoBehaviour {
 	private SpriteRenderer spriteRenderer;
 	private Animator anim;
 
+	private int patternIndex = -1;
+	private int curPatternCount;
+	public int[] maxPatternCount;
 
 	private void Awake() {
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -43,7 +46,73 @@ public class Enemy : MonoBehaviour {
 				health = 50;
 				Debug.Log("enemyC");
 				break;
+			case "Boss":
+				health = 3000;
+				Invoke("Stop", 2f);
+				break;
 		}
+	}
+
+	private void Stop() {
+		if(!gameObject.activeSelf)
+			return;
+		
+		Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+		rigid.velocity = Vector2.zero;
+		
+		Invoke("BossPattern", 2f);
+	}
+
+	private void BossPattern() {
+		patternIndex = patternIndex == 3 ? 0 : patternIndex+1;
+		curPatternCount = 0;
+
+		switch (patternIndex) {
+			case 0:
+				FirePattern1();
+				break;
+			case 1:
+				FirePattern2();
+				break;
+			case 2:
+				FirePattern3();
+				break;
+			case 3:
+				FirePattern4();
+				break;
+		}
+	}
+
+	private void FirePattern1() {
+		Debug.Log("Pattern1");
+		curPatternCount++;
+		
+		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern1", 2f);
+		else Invoke("BossPattern", 3f);
+	}
+
+	private void FirePattern2() {
+		Debug.Log("Pattern2");
+		curPatternCount++;
+		
+		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern2", 3f);
+		else Invoke("BossPattern", 3f);
+	}
+
+	private void FirePattern3() {
+		Debug.Log("Pattern3");
+		curPatternCount++;
+		
+		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern3", 0.15f);
+		else Invoke("BossPattern", 3f);
+	}
+
+	private void FirePattern4() {
+		Debug.Log("Pattern4");
+		curPatternCount++;
+		
+		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern4", 0.7f);
+		else Invoke("BossPattern", 3f);
 	}
 
 	private void Update() {
