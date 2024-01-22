@@ -7,6 +7,7 @@ public class PoolManager : MonoBehaviour {
 	public GameObject enemyAPrefab;
 	public GameObject enemyBPrefab;
 	public GameObject enemyCPrefab;
+	public GameObject enemyDPrefab;
 	public GameObject itemCoinPrefab;
 	public GameObject itemPowerPrefab;
 	public GameObject itemBoomPrefab;
@@ -21,6 +22,7 @@ public class PoolManager : MonoBehaviour {
 	private GameObject[] enemyA;
 	private GameObject[] enemyB;
 	private GameObject[] enemyC;
+	private GameObject[] enemyD;
 	
 	private GameObject[] itemCoin;
 	private GameObject[] itemPower;
@@ -40,6 +42,7 @@ public class PoolManager : MonoBehaviour {
 		enemyA = new GameObject[10];
 		enemyB = new GameObject[10];
 		enemyC = new GameObject[10];
+		enemyD = new GameObject[10];
 
 		itemCoin = new GameObject[20];
 		itemPower = new GameObject[20];
@@ -68,6 +71,10 @@ public class PoolManager : MonoBehaviour {
 		for (int i = 0; i < enemyC.Length; i++) {
 			enemyC[i] = Instantiate(enemyCPrefab);
 			enemyC[i].SetActive(false);
+		}
+		for (int i = 0; i < enemyD.Length; i++) {
+			enemyD[i] = Instantiate(enemyDPrefab);
+			enemyD[i].SetActive(false);
 		}
 		for (int i = 0; i < itemCoin.Length; i++) {
 			itemCoin[i] = Instantiate(itemCoinPrefab);
@@ -122,6 +129,9 @@ public class PoolManager : MonoBehaviour {
 			case "EnemyC":
 				targetPool = enemyC;
 				break;
+			case "EnemyD":
+				targetPool = enemyD;
+				break;
 			case "ItemCoin":
 				targetPool = itemCoin;
 				break;
@@ -174,6 +184,9 @@ public class PoolManager : MonoBehaviour {
 				break;
 			case "EnemyC":
 				targetPool = enemyC;
+				break;
+			case "EnemyD":
+				targetPool = enemyD;
 				break;
 			case "ItemCoin":
 				targetPool = itemCoin;
