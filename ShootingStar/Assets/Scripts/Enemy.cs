@@ -85,18 +85,18 @@ public class Enemy : MonoBehaviour {
 
 	private void FirePattern1() {
 		GameObject bulletR = poolManager.MakeObj("BulletBossA");
-		bulletR.transform.position = transform.position + Vector3.right * 0.3f;
+		bulletR.transform.position = transform.position + Vector3.right * 0.5f;
 		GameObject bulletRR = poolManager.MakeObj("BulletBossA");
-		bulletRR.transform.position = transform.position + Vector3.right * 0.45f;
+		bulletRR.transform.position = transform.position + Vector3.right * 0.8f;
 		GameObject bulletL = poolManager.MakeObj("BulletBossA");
-		bulletL.transform.position = transform.position + Vector3.left * 0.3f;
+		bulletL.transform.position = transform.position + Vector3.left * 0.5f;
 		GameObject bulletLL = poolManager.MakeObj("BulletBossA");
-		bulletLL.transform.position = transform.position + Vector3.left * 0.45f;
+		bulletLL.transform.position = transform.position + Vector3.left * 0.8f;
 			
 		Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
-		Rigidbody2D rigidRR = bulletR.GetComponent<Rigidbody2D>();
-		Rigidbody2D rigidL = bulletR.GetComponent<Rigidbody2D>();
-		Rigidbody2D rigidLL = bulletL.GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidRR = bulletRR.GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidL = bulletL.GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidLL = bulletLL.GetComponent<Rigidbody2D>();
 		
 		rigidR.AddForce(Vector2.down * 8, ForceMode2D.Impulse);
 		rigidRR.AddForce(Vector2.down * 8, ForceMode2D.Impulse);
