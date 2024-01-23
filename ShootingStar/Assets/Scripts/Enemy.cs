@@ -110,7 +110,17 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void FirePattern2() {
-		Debug.Log("Pattern2");
+		for (int i = 0; i < 4; i++) {
+			GameObject bullet = poolManager.MakeObj("BulletEnemyB");
+			bullet.transform.position = transform.position;
+			
+			Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+			Vector2 dirVec = player.transform.position - transform.position;
+			Vector2 ranVec = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(0f, 2f));
+			dirVec += ranVec;
+			rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+		}
+		
 		curPatternCount++;
 		
 		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern2", 3f);
