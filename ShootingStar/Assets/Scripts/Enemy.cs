@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour {
 			Vector2 dirVec = player.transform.position - transform.position;
 			Vector2 ranVec = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(0f, 2f));
 			dirVec += ranVec;
-			rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+			rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
 		}
 		
 		curPatternCount++;
@@ -143,7 +143,22 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void FirePattern4() {
-		Debug.Log("Pattern4");
+		int roundNumA = 50;
+		int roundNumB = 40;
+		int roundNum = curPatternCount % 2 == 0 ? roundNumA : roundNumB;
+		for (int i = 0; i < roundNum; i++) {
+			GameObject bullet = poolManager.MakeObj("BulletBossB");
+			bullet.transform.position = transform.position;
+			bullet.transform.rotation = Quaternion.identity;
+
+			Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+			Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 2 * i / roundNum), Mathf.Sin(Mathf.PI * 2 * i / roundNum));
+			rigid.AddForce(dirVec.normalized * 2, ForceMode2D.Impulse);
+			
+			Vector3 rotVec = Vector3.forward * 360 * i / roundNum + Vector3.forward * 90;
+			bullet.transform.Rotate(rotVec);
+		}
+		
 		curPatternCount++;
 		
 		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern4", 0.7f);
