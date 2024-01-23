@@ -84,7 +84,25 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void FirePattern1() {
-		Debug.Log("Pattern1");
+		GameObject bulletR = poolManager.MakeObj("BulletBossA");
+		bulletR.transform.position = transform.position + Vector3.right * 0.3f;
+		GameObject bulletRR = poolManager.MakeObj("BulletBossA");
+		bulletRR.transform.position = transform.position + Vector3.right * 0.45f;
+		GameObject bulletL = poolManager.MakeObj("BulletBossA");
+		bulletL.transform.position = transform.position + Vector3.left * 0.3f;
+		GameObject bulletLL = poolManager.MakeObj("BulletBossA");
+		bulletLL.transform.position = transform.position + Vector3.left * 0.45f;
+			
+		Rigidbody2D rigidR = bulletR.GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidRR = bulletR.GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidL = bulletR.GetComponent<Rigidbody2D>();
+		Rigidbody2D rigidLL = bulletL.GetComponent<Rigidbody2D>();
+		
+		rigidR.AddForce(Vector2.down * 8, ForceMode2D.Impulse);
+		rigidRR.AddForce(Vector2.down * 8, ForceMode2D.Impulse);
+		rigidL.AddForce(Vector2.down * 8, ForceMode2D.Impulse);
+		rigidLL.AddForce(Vector2.down * 8, ForceMode2D.Impulse);
+		
 		curPatternCount++;
 		
 		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern1", 2f);
