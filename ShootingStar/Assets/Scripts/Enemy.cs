@@ -128,7 +128,14 @@ public class Enemy : MonoBehaviour {
 	}
 
 	private void FirePattern3() {
-		Debug.Log("Pattern3");
+		GameObject bullet = poolManager.MakeObj("BulletEnemyA");
+		bullet.transform.position = transform.position;
+		bullet.transform.rotation = Quaternion.identity;
+
+		Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
+		Vector2 dirVec = new Vector2(Mathf.Cos(Mathf.PI * 10 * curPatternCount/maxPatternCount[patternIndex]), -1);
+		rigid.AddForce(dirVec.normalized * 5, ForceMode2D.Impulse);
+		
 		curPatternCount++;
 		
 		if (curPatternCount < maxPatternCount[patternIndex]) Invoke("FirePattern3", 0.15f);
