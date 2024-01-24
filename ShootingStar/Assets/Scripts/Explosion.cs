@@ -11,6 +11,14 @@ public class Explosion : MonoBehaviour {
 		anim = GetComponent<Animator>();
 	}
 
+	private void OnEnable() {
+		Invoke("Disable", 0.5f);
+	}
+
+	private void Disable() {
+		gameObject.SetActive(false);
+	}
+
 	public void StartExplosion(string target) {
 		anim.SetTrigger("OnExp");
 
