@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
 	public GameManager manager;
 	public PoolManager poolManager;
 	public bool isBoom;
+	public bool[] joyControl;
+	public bool isClick;
 
 	private Animator anim;
 	private bool isRespawn;
@@ -62,6 +64,20 @@ public class Player : MonoBehaviour {
 		Fire();
 		Boom();
 		Reload();
+	}
+
+	public void JoyPad(int type) {
+		for (int i = 0; i < joyControl.Length; i++) {
+			joyControl[i] = i == type;
+		}
+	}
+
+	public void JoyDown() {
+		isClick = true;
+	}
+	
+	public void JoyUp() {
+		isClick = false;
 	}
 
 	private void PlayerMove() {
