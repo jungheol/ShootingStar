@@ -187,6 +187,7 @@ public class Player : MonoBehaviour {
 			
 			life--;
 			manager.UpdateLifeIcon(life);
+			manager.SetExplosion(transform.position, "Player");
 
 			if (life == 0) {
 				manager.GameOver();

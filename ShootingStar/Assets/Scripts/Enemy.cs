@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour {
 	public float curShotDelay;
 	public Sprite[] sprites;
 	public GameObject player;
+	public GameManager gameManager;
 	public PoolManager poolManager;
 
 	private SpriteRenderer spriteRenderer;
@@ -234,6 +235,7 @@ public class Enemy : MonoBehaviour {
 				itemBoom.transform.position = transform.position;
 			}
 			gameObject.SetActive(false);
+			gameManager.SetExplosion(transform.position, enemyName);
 			transform.rotation = Quaternion.identity;
 		}
 	}

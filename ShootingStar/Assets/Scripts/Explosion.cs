@@ -16,16 +16,16 @@ public class Explosion : MonoBehaviour {
 
 		switch (target) {
 			case "Player":
-			case "EnemyB":
+			case "enemyB":
 				transform.localScale = Vector3.one * 1f;
 				break;
-			case "EnemyA":
+			case "enemyA":
 				transform.localScale = Vector3.one * 0.7f;
 				break;
-			case "EnemyC":
+			case "enemyC":
 				transform.localScale = Vector3.one * 2f;
 				break;
-			case "EnemyD":
+			case "enemyD":
 				transform.localScale = Vector3.one * 3f;
 				break;
 		}

@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour {
 		Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
 		Enemy enemyLogic = enemy.GetComponent<Enemy>();
 		enemyLogic.player = player;
+		enemyLogic.gameManager = this;
 		enemyLogic.poolManager = poolManager;
 		
 		if (enemyPoint == 5 || enemyPoint == 6) {
