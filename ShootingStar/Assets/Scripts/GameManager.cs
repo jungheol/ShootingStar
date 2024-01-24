@@ -142,6 +142,14 @@ public class GameManager : MonoBehaviour {
 		SceneManager.LoadScene(0);
 		Time.timeScale = 1;
 	}
+
+	public void SetExplosion(Vector3 pos, string type) {
+		GameObject explosion = poolManager.MakeObj("Explosion");
+		Explosion explosionLogic = explosion.GetComponent<Explosion>();
+
+		explosion.transform.position = pos;
+		explosionLogic.StartExplosion(type);
+	}
 	
 	public void RespawnPlayer() {
 		Invoke("RespawnPlayerExe", 2f);
