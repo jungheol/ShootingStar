@@ -109,9 +109,9 @@ public class Player : MonoBehaviour {
 		boomEffect.SetActive(true);
 		Invoke("OffBoomEffect", 3f);
 					
-		GameObject[] enemiesA = poolManager.GetPool("enemyA");
-		GameObject[] enemiesB = poolManager.GetPool("enemyB");
-		GameObject[] enemiesC = poolManager.GetPool("enemyC");
+		GameObject[] enemiesA = poolManager.GetPool("EnemyA");
+		GameObject[] enemiesB = poolManager.GetPool("EnemyB");
+		GameObject[] enemiesC = poolManager.GetPool("EnemyC");
 		for (int i = 0; i < enemiesA.Length; i++) {
 			if (enemiesA[i].activeSelf) {
 				Enemy enemyLogic = enemiesA[i].GetComponent<Enemy>();
