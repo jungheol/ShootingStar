@@ -24,14 +24,14 @@ public class Player : MonoBehaviour {
 	public GameObject[] followers;
 	public GameManager manager;
 	public PoolManager poolManager;
-	public bool isBoom;
-	public bool[] joyControl;
-	public bool isClick;
-	public bool isButtonA;
-	public bool isButtonB;
 
 	private Animator anim;
 	private bool isRespawn;
+	private bool isBoom;
+	private bool[] joyControl = new bool[9];
+	private bool isClick;
+	private bool isButtonA;
+	private bool isButtonB;
 	private SpriteRenderer spriteRenderer;
 
 	private void Awake() {
