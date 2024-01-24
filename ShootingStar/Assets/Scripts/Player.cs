@@ -27,6 +27,8 @@ public class Player : MonoBehaviour {
 	public bool isBoom;
 	public bool[] joyControl;
 	public bool isClick;
+	public bool isButtonA;
+	public bool isButtonB;
 
 	private Animator anim;
 	private bool isRespawn;
@@ -93,7 +95,6 @@ public class Player : MonoBehaviour {
 		if (joyControl[6]) { h = -1; v = -1; }
 		if (joyControl[7]) { h = 0; v = -1; }
 		if (joyControl[8]) { h = 1; v = -1; }
-
 		
 		if ((h == 1 && isTouchRight) || (h == -1 && isTouchLeft) || !isClick) h = 0;
 
@@ -109,8 +110,21 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+	public void ButtonADown() {
+		isButtonA = true;
+	}
+
+	public void ButtonAUp() {
+		isButtonA = false;
+	}
+
+	public void ButtonBDown() {
+		isButtonB = true;
+	}
+
 	private void Fire() {
-		if (!Input.GetButton("Fire1")) return;
+		// if (!Input.GetButton("Fire1")) return;
+		if (!isButtonA) return;
 
 		if (curShotDelay < maxShotDelay) return;
 		
@@ -146,7 +160,8 @@ public class Player : MonoBehaviour {
 	}
 
 	private void Boom() {
-		if (!Input.GetButton("Fire2")) return;
+		// if (!Input.GetButton("Fire2")) return;
+		if(!isButtonB) return;
 
 		if (isBoom) return;
 		
