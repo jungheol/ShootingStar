@@ -82,10 +82,22 @@ public class Player : MonoBehaviour {
 
 	private void PlayerMove() {
 		float h = Input.GetAxisRaw("Horizontal");
-		if((h == 1 && isTouchRight) || (h == -1 && isTouchLeft)) h = 0;
-
 		float v = Input.GetAxisRaw("Vertical");
-		if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom)) v = 0;
+
+		if (joyControl[0]) { h = -1; v = 1; }
+		if (joyControl[1]) { h = 0; v = 1; }
+		if (joyControl[2]) { h = 1; v = 1; }
+		if (joyControl[3]) { h = -1; v = 0; }
+		if (joyControl[4]) { h = 0; v = 0; }
+		if (joyControl[5]) { h = 1; v = 0; }
+		if (joyControl[6]) { h = -1; v = -1; }
+		if (joyControl[7]) { h = 0; v = -1; }
+		if (joyControl[8]) { h = 1; v = -1; }
+
+		
+		if ((h == 1 && isTouchRight) || (h == -1 && isTouchLeft) || !isClick) h = 0;
+
+		if ((v == 1 && isTouchTop) || (v == -1 && isTouchBottom) || !isClick) v = 0;
 		
 		Vector3 curPos = transform.position;
 		Vector3 nextPos = new Vector3(h, v, 0) * moveSpeed * Time.deltaTime;
