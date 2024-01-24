@@ -27,13 +27,34 @@ public class Player : MonoBehaviour {
 	public bool isBoom;
 
 	private Animator anim;
-	private string bulletA;
-	private string bulletB;
+	private bool isRespawn;
+	private SpriteRenderer spriteRenderer;
 
 	private void Awake() {
 		anim = GetComponent<Animator>();
-		bulletA = "BulletPlayerA";
-		bulletB = "BulletPlayerB";
+		spriteRenderer = GetComponent<SpriteRenderer>();
+	}
+
+	private void OnEnable() {
+		Unbeatable();
+		Invoke("Unbeatable", 2f);
+	}
+
+	private void Unbeatable() {
+		isRespawn = !isRespawn;
+		
+		if (isRespawn) {
+			spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+			for (int i = 0; i < followers.Length; i++) {
+				followers[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.5f);
+			}
+		} else {
+			spriteRenderer.color = new Color(1, 1, 1, 1);
+			for (int i = 0; i < followers.Length; i++) {
+				followers[i].GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+			}
+		}
+		
 	}
 
 	private void Update() {
@@ -67,18 +88,18 @@ public class Player : MonoBehaviour {
 		
 		switch (power) {
 			case 0:
-				SpawnBullet(Vector3.zero, bulletA);
+				SpawnBullet(Vector3.zero, "BulletPlayerA");
 				break;
 
 			case 1:
-				SpawnBullet(Vector3.right * 0.1f, bulletA);
-				SpawnBullet(Vector3.left * 0.1f, bulletA);
+				SpawnBullet(Vector3.right * 0.1f, "BulletPlayerA");
+				SpawnBullet(Vector3.left * 0.1f, "BulletPlayerA");
 				break;
 
 			default:
-				SpawnBullet(Vector3.right * 0.3f, bulletA);
-				SpawnBullet(Vector3.zero, bulletB);
-				SpawnBullet(Vector3.left * 0.3f, bulletA);
+				SpawnBullet(Vector3.right * 0.3f, "BulletPlayerA");
+				SpawnBullet(Vector3.zero, "BulletPlayerB");
+				SpawnBullet(Vector3.left * 0.3f, "BulletPlayerA");
 				break;
 		}
 
@@ -162,6 +183,8 @@ public class Player : MonoBehaviour {
 					break;
 			}
 		} else if (other.CompareTag("Enemy") || other.CompareTag("EnemyBullet")) {
+			if (isRespawn) return;
+			
 			life--;
 			manager.UpdateLifeIcon(life);
 
