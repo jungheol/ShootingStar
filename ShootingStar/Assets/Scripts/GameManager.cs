@@ -25,10 +25,29 @@ public class GameManager : MonoBehaviour {
 	public int spawnIndex;
 	public bool isSpawnFinish;
 
+	public Animator startAnim;
+	public Animator clearAnim;
+	private int stage = 1;
+
 	private void Awake() {
 		spawnList = new List<Spawn>();
 		enemyObjects = new string[] { "EnemyA", "EnemyB", "EnemyC", "EnemyD" };
+		StageStart();
+	}
+
+	public void StageStart() {
+		startAnim.SetTrigger("TextOn");
+		startAnim.GetComponent<Text>().text = "Stage " + stage + "\nStart!";
+		clearAnim.GetComponent<Text>().text = "Stage " + stage + "\nClear!!";
+		
 		ReadSpawnFile();
+		
+	}
+
+	public void StageEnd() {
+		clearAnim.SetTrigger("TextOn");
+
+		stage++;
 	}
 
 	private void ReadSpawnFile() {
@@ -37,7 +56,7 @@ public class GameManager : MonoBehaviour {
 		spawnIndex = 0;
 		isSpawnFinish = false;
 		// 파일 읽기
-		TextAsset textFile = Resources.Load("stage 0") as TextAsset;
+		TextAsset textFile = Resources.Load("stage " + stage) as TextAsset;
 		StringReader stringReader = new StringReader(textFile.text);
 
 		while (stringReader != null) {
