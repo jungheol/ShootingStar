@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
 	public Animator startAnim;
 	public Animator clearAnim;
 	public Animator fadeAnim;
+	public Transform playerPos;
 	private int stage = 1;
 
 	private void Awake() {
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour {
 		
 		fadeAnim.SetTrigger("FadeOut");
 
+		player.transform.position = playerPos.position;
 	}
 
 	private void ReadSpawnFile() {
