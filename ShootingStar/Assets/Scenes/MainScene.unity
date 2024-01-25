@@ -649,6 +649,7 @@ MonoBehaviour:
   isSpawnFinish: 0
   startAnim: {fileID: 592861489}
   clearAnim: {fileID: 1318535698}
+  fadeAnim: {fileID: 346476300}
 --- !u!4 &210760786
 Transform:
   m_ObjectHideFlags: 0
@@ -773,6 +774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346476299}
   - component: {fileID: 346476298}
+  - component: {fileID: 346476300}
   m_Layer: 0
   m_Name: Fade Black
   m_TagString: Untagged
@@ -847,6 +849,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &346476300
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346476297}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ad59410f2b5b14c18a9a5fad53ba2d87, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &386873524
 GameObject:
   m_ObjectHideFlags: 0

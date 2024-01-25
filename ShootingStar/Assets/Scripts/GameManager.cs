@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour {
 
 	public Animator startAnim;
 	public Animator clearAnim;
+	public Animator fadeAnim;
 	private int stage = 1;
 
 	private void Awake() {
@@ -42,12 +43,16 @@ public class GameManager : MonoBehaviour {
 		
 		ReadSpawnFile();
 		
+		fadeAnim.SetTrigger("FadeIn");
 	}
 
 	public void StageEnd() {
 		clearAnim.SetTrigger("TextOn");
 
 		stage++;
+		
+		fadeAnim.SetTrigger("FadeOut");
+
 	}
 
 	private void ReadSpawnFile() {
