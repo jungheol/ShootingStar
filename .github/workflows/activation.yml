@@ -1,18 +1,41 @@
-name: Acquire activation file
+name: Automated Build ⭐
+
 on:
-  workflow_dispatch: {}
+  push: # Master 브랜치에 Push가 되면 빌드가 되도록 동작시킵니다.
+    branches: [ main ]
+    
 jobs:
-  activation:
-    name: Request manual activation file 🔑
-    runs-on: ubuntu-latest
+  buildWindows:
+    name: 💻 Android
+    runs-on: self-hosted
+    
     steps:
-      # Request manual activation file
-      - name: Request manual activation file
-        id: getManualLicenseFile
-        uses: game-ci/unity-request-activation-file@v2
-      # Upload artifact (Unity_v20XX.X.XXXX.alf)
-      - name: Expose as artifact
-        uses: actions/upload-artifact@v2
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          name: ${{ steps.getManualLicenseFile.outputs.filePath }}
-          path: ${{ steps.getManualLicenseFile.outputs.filePath }}
+          lfs: true
+
+      # Cache (캐시파일을 생성하여 다음 빌드시 더 빠르게 빌드를 할 수 있도록 해줍니다.)
+      - uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: Android
+
+      # Output
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Android
+          path: build
